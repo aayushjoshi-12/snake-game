@@ -5,6 +5,7 @@ from collections import deque
 from game import SnakeGameAI, Direction, Point, BLOCK_SIZE
 from model import Linear_QNet, QTrainer
 from helper import plot
+import os
 
 MAX_MEMORY = 100_100
 BATCH_SIZE = 1000
@@ -17,6 +18,9 @@ class Agent:
         self.gamma = 0.9
         self.memory = deque(maxlen=MAX_MEMORY)
         self.model = Linear_QNet(11, 256, 3)
+        if os.path.isfile('./model/model.pth'):
+            self.model.load()
+            print('Last saved model loaded')
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     def get_state(self, game):
@@ -64,7 +68,7 @@ class Agent:
         self.memory.append((state, action, reward, next_state, done))
 
     def train_long_memory(self):
-        if len(self.memory) < BATCH_SIZE:
+        if len(self.memory) >= BATCH_SIZE:
             mini_sample = random.sample(self.memory, BATCH_SIZE)
         else:
             mini_sample = self.memory
@@ -100,7 +104,7 @@ def train():
     
     while True:
         state_old = agent.get_state(game) 
-        final_move = agent.get_action(game)
+        final_move = agent.get_action(state_old)
         reward, done, score = game.play_step(final_move)
         state_new = agent.get_state(game)
         agent.train_short_memory(state_old, final_move, reward, state_new, done)
@@ -111,9 +115,9 @@ def train():
             agent.train_long_memory()
             if score > record:
                 record = score
-                agent.model.save
+                agent.model.save()
             
-            print('Game: ',agent.n_games, 'Score: ', score,'Record: ',record)
+            print('Game:',agent.n_games, 'Score:', score,'Record:',record)
             plot_scores.append(score)
             total_score += score
             mean_score = total_score / agent.n_games

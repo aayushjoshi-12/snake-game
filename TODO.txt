@@ -1,0 +1,4 @@
+snake dies when it moves backward 
+improve game speed  
+stops improving after reaching 69 score (gets stuck in a loop)
+load model doesn't works properly
