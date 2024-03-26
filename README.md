@@ -16,7 +16,7 @@ Welcome to the Snake Game with AI, a Python project that combines the classic ar
 2. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your_username/Snake_Game.git
+   git clone https://github.com/aayushjoshi-12/Snake_Game.git
    ```
 
 3. Navigate to the project directory:
@@ -68,14 +68,6 @@ For more details on the neural network architecture and training process, please
 
 Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests to help improve this project.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contact Information
 
-For any inquiries or support, please contact [Your Name](mailto:your_email@example.com).
-
----
-
-Feel free to customize this README according to your preferences and project specifications. If you have any further questions or need additional assistance, don't hesitate to ask!
+For any inquiries or support, please contact [Aayush Joshi](mailto:joshiaayush1244@gmail.com).
